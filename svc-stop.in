@@ -39,12 +39,15 @@ if [ -d "$svc/log" ]; then
 fi
 
 if [ -L "$svc" ]; then
-  link="`readlink "$svc"`"
-  rm -f "$svc"
-  if [ -d "$link" ]; then
-    svc -dx "$link"
+  if cd "$svc" 2>/dev/null; then
+    if [ -d log ]; then
+      svc -dx log
+    fi
+    svc -dx .
     echon "supervise "
+    cd ${SVSCANDIR-/service}
   fi
+  rm -f "$svc"
 fi
 
 echo "done."
