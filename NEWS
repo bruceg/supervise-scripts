@@ -1,4 +1,9 @@
 -------------------------------------------------------------------------------
+Changes in version 3.2
+- Reversed the order of the arguments to svc-add, making the directory
+  name mandatory instead of the link name.  If the directory name is not
+  absolute, it will be prefixed with /var/service, as before.
+-------------------------------------------------------------------------------
 Changes in version 3.1
 - Split off the functionality from "svc-start" that adds a service into
   /service into the "svc-add" script.

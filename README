@@ -1,6 +1,6 @@
 supervise-scripts
-version 3.1
-2000-12-04
+version 3.2
+2000-12-23
 Copyright (C) 2000
 Bruce Guenter <bruceg@em.ca>
 http://em.ca/~bruceg/supervise-scripts/
@@ -35,8 +35,8 @@ stopped.  Doing so will also stop all running services.
 Intended Usage
 --------------
 
-Create a new service directory somewhere other than /service.  Set up a
-"run" script, and a "log" directory with its own "run" script if
+Create a new service directory somewhere other than under /service.  Set
+up a "run" script, and a "log" directory with its own "run" script if
 appropriate.
 
 Use "svc-add" to add the new service into /service for the first time.

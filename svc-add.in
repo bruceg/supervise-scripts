@@ -6,17 +6,21 @@ else
   down=false
 fi
 
-usage $# 1 2 "[-d] service [svc-directory]"
+usage $# 1 2 "[-d] svc-directory [svc-name]"
 
-svc="$1"
-if [ "X$2" = X ]; then
-  svcdir="${SVCLOCKDIR-/var/service}/$svc"
-else
-  svcdir="$2"
+svcdir="$1"
+if ! echo "$svcdir" | egrep '^/' >/dev/null 2>&1; then
+  svcdir="${SVCLOCKDIR-/var/service}/$svcdir"
 fi
 
-if [ -e "$svc" ]; then
-  fatal "Service '$svc' is already set up."
+if [ "X$2" = X ]; then
+  svcname="$2"
+else
+  svcname="`basename "$svcdir"`"
+fi
+
+if [ -e "$svcname" ]; then
+  fatal "Service '$svcname' is already set up."
 fi
 
 if ! [ -d "$svcdir" ]; then
@@ -36,4 +40,4 @@ else
   chmod -t "$svcdir"
 fi
 
-ln -s "$svcdir" "$svc"
+ln -s "$svcdir" "$svcname"
