@@ -8,6 +8,7 @@ void insthier(void) {
   int man1 = d(man, "man1", -1, -1, 0755);
 
   c(bin, "svc-add",               -1, -1, 0755);
+  c(bin, "svc-build",             -1, -1, 0755);
   c(bin, "svc-isdown",            -1, -1, 0755);
   c(bin, "svc-isup",              -1, -1, 0755);
   c(bin, "svc-remove",            -1, -1, 0755);
