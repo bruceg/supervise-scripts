@@ -1,0 +1,8 @@
+#!/bin/sh
+PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/bin:/bin
+exec >/dev/console 2>&1
+cd "${1-/service}"
+for svc in *
+do
+  svc -dx "$svc/log" "$svc"
+done
