@@ -13,7 +13,7 @@ installdir = $(install) -d
 installsrc = $(install) -m 444
 
 SCRIPTS = svc-isdown svc-isup svc-waitdown svc-waitup \
-	svc-start svc-stop svc-status \
+	svc-add svc-remove svc-start svc-stop svc-status \
 	svscan-add-to-inittab svscan-start svscan-stopall
 MAN1S = svc-add.1 svc-remove.1 svc-start.1 svc-stop.1
 DOCS = COPYING NEWS README
