@@ -1,13 +1,13 @@
 Name: supervise-scripts
 Summary: Utility scripts for use with supervise and svscan.
-Version: %VERSION%
+Version: @VERSION@
 Release: 1
 Copyright: GPL
 Group: Utilities/System
-Source: http://em.ca/~bruceg/supervise-scripts/supervise-scripts-%VERSION%.tar.gz
-BuildRoot: /tmp/supervise-scripts-root
+Source: http://untroubled.org/supervise-scripts/supervise-scripts-%{version}.tar.gz
+BuildRoot: %{_tmppath}/supervise-scripts-root
 BuildArch: noarch
-URL: http://em.ca/~bruceg/supervise-scripts/
+URL: http://untroubled.org/supervise-scripts/
 Packager: Bruce Guenter <bruceg@em.ca>
 Requires: daemontools >= 0.70-2
 Requires: fileutils
@@ -22,14 +22,25 @@ A set of scripts for handling programs managed with supervise and svscan.
 %setup
 
 %build
+echo %{_bindir} >conf-bin
+echo %{_mandir} >conf-man
+make programs
 
 %install
 rm -fr $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{service,usr,var/service}
-make install_prefix=$RPM_BUILD_ROOT bindir=%{_bindir} mandir=%{_mandir} install
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}
+mkdir -p $RPM_BUILD_ROOT/service
+mkdir -p $RPM_BUILD_ROOT/var/service
+
+echo $RPM_BUILD_ROOT%{_bindir} >conf-bin
+echo $RPM_BUILD_ROOT%{_mandir} >conf-man
+make installer instcheck
+./installer
+./instcheck
 
 %post
-/usr/bin/svscan-add-to-inittab
+%{_bindir}/svscan-add-to-inittab
 
 %clean
 rm -rf $RPM_BUILD_ROOT

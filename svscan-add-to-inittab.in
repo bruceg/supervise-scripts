@@ -1,4 +1,3 @@
-#!/bin/sh
 set -e
 
 filename="${1-/etc/inittab}"
@@ -55,8 +54,8 @@ fi
 # Splice the new lines into the old file
 {
   catit | head -$(($lineno-1))
-  echo 'SV:2345:respawn:@BINDIR@/svscan-start /service'
-  echo 'SX:S016:wait:@BINDIR@/svscan-stopall /service'
+  echo "SV:2345:respawn:$conf_bin/svscan-start /service"
+  echo "SX:S016:wait:$conf_bin/svscan-stopall /service"
   catit | tail +$lineno
 } >"$tmpfile"
 

@@ -1,0 +1,2 @@
+dependon(map(lambda fn:fn[:-3], glob('*=in')))
+: svscan-start svscan-stopall

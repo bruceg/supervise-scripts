@@ -1,4 +1,3 @@
-#!/bin/sh template
 usage $# 1 1 service
 if svok "$1"; then
   svstat "$1"

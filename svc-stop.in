@@ -1,4 +1,3 @@
-#!/bin/sh template
 if [ "$1" = -q ]; then
   exec >/dev/null
   shift

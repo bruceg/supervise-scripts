@@ -1,0 +1,2 @@
+: conf-bin
+echo "conf_bin='`head -1 conf-bin`'" >%(target)s

@@ -1,0 +1,6 @@
+: echon-c.sh echon-n.sh
+case `echo 'a\c'` in \
+  'a\c') echo 'Using echo -n' >&2; cat echon-n.sh;; \
+  'a')   echo 'Using echo \\c' >&2; cat echon-c.sh;; \
+  *)     echo "Unrecognized output from echo!" >&2; exit 1;; \
+esac >%(target)s
