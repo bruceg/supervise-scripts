@@ -1,5 +1,5 @@
 PACKAGE = supervise-scripts
-VERSION = 3.2
+VERSION = 3.3
 
 install_prefix =
 prefix = /usr/local

@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
+Changes in version 3.3
+- Fixed a syntax error in svscan-add-to-inittab that affected
+  (primarily) RedHat 7 systems.
+-------------------------------------------------------------------------------
 Changes in version 3.2
 - Reversed the order of the arguments to svc-add, making the directory
   name mandatory instead of the link name.  If the directory name is not
