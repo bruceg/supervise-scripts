@@ -21,7 +21,7 @@ DIST = $(DOCS) $(MAN1S) Makefile configure template.sh *.in \
 	svscan-add-to-inittab svscan-start svscan-stopall
 
 all: configure
-	sh configure svc-*.in
+	env BINDIR=$(bindir) ./configure sv*.in
 
 install: all
 	$(installdir) $(install_prefix)$(bindir)
@@ -49,3 +49,6 @@ rpms: dist
 	rpm -ta --clean $(distdir).tar.gz
 	mv $(HOME)/redhat/SRPMS/$(distdir)-*.src.rpm .
 	mv $(HOME)/redhat/RPMS/noarch/$(distdir)-*.noarch.rpm .
+
+clean:
+	for file in sv*.in; do basename $$file .in; done | xargs $(RM)
