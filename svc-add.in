@@ -36,4 +36,4 @@ else
   chmod -t "$svcdir"
 fi
 
-ln -s "$svcdir" "svc"
+ln -s "$svcdir" "$svc"

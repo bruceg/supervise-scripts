@@ -3,7 +3,7 @@ usage $# 1 1 service
 
 svc="$1"
 
-svc-stop "$svc"
+svc-stop -q "$svc"
 
 if ! [ -L "$svc" ]; then
   fatal "Service '$svc' is not symlinked into /service and can't be removed."
