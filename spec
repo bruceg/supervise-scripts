@@ -38,7 +38,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc COPYING README
+%doc COPYING NEWS README
 %dir /service
 %{_bindir}/*
 %{_mandir}/man*/*
