@@ -6,6 +6,6 @@ count=1
 until svc-isup "$1"; do
   echon .
   sleep 1
-  let count=count+1
+  count=$(($count+1))
   if [ $count -gt ${SVCTIMEOUT-15} ]; then exit 1; fi
 done

@@ -26,7 +26,7 @@ start() {
     until svok "$1"; do
       echon .
       sleep 1
-      let count=count+1
+      count=$(($count+1))
       if [ $count -gt ${SVCTIMEOUT-15} ]; then
         echon ") "
 	fatal "supervise for '$1' did not start!  Is svscan running?"

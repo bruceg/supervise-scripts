@@ -54,11 +54,9 @@ fi
 
 # Splice the new lines into the old file
 {
-  let lineno=lineno-1
-  catit | head -$lineno
+  catit | head -$(($lineno-1))
   echo 'SV:2345:respawn:@BINDIR@/svscan-start /service'
   echo 'SX:S016:wait:@BINDIR@/svscan-stopall /service'
-  let lineno=lineno+1
   catit | tail +$lineno
 } >"$tmpfile"
 
