@@ -1,0 +1,29 @@
+#!/bin/sh
+
+expr=""
+
+case `echo 'a\c'` in
+  'a\c')
+    echo 'Using echo -n'
+    perl='s/echon "([^"]*)"/echo -n "\1"/; s/echon ([^;]*)/echo -n \1/'
+    ;;
+  'a')
+    echo 'Using echo \\c'
+    perl='s/echon "([^"]*)"/echo "\1\c"/; s/echon ([^;]*)/echo \1\\c/'
+    ;;
+  *)
+    echo "Unrecognized output from echo!"
+    exit 1
+    ;;
+esac
+
+process() {
+  perl -p -e "$perl" <$1 >$2
+  chmod +x $2
+}
+
+for file in svc-*.in; do
+  out=`basename $file .in`
+  echo "Processing $file -> $out"
+  process $file $out
+done
