@@ -25,9 +25,7 @@ A set of scripts for handling programs managed with supervise and svscan.
 
 %install
 rm -fr $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr
-mkdir -p $RPM_BUILD_ROOT/service
-
+mkdir -p $RPM_BUILD_ROOT/{service,usr,var/service}
 make install_prefix=$RPM_BUILD_ROOT bindir=%{_bindir} mandir=%{_mandir} install
 
 %post
@@ -39,6 +37,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc COPYING NEWS README
-%dir /service
 %{_bindir}/*
 %{_mandir}/man*/*
+%dir /service
+%dir /var/service
