@@ -1,0 +1,30 @@
+#!/bin/sh
+usage $# 1 1 "log-directory"
+
+log="$1"
+
+confdir=/etc/svclog.d
+
+read() {
+  local param=$1
+  shift
+  if [ -s $confdir/"$log"/$param ]
+  then
+    head -1 $confdir/"$log"/$param
+  elif [ -s $confdir/DEFAULT/$param ]
+  then
+    head -1 $confdir/DEFAULT/$param
+  else
+    echo "$@"
+  fi
+}
+
+size=`read size 99999`
+number=`read number 10`
+processor=`read processor ""`
+if [ -n "$processor" ]
+then
+  processor="!$processor"
+fi
+
+echo exec multilog t n$number s$size /var/log/"$log"
