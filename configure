@@ -23,7 +23,7 @@ esac
 perl="$perl; s|\@BINDIR\@|$BINDIR|g"
 
 process_template() {
-  sed -e "s/%PROGRAM%/$2/g" template.sh
+  sed -e "s/@PROGRAM@/$2/g" template.sh
   tail +2 | perl -p -e "$perl"
 }
 
