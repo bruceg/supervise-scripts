@@ -11,4 +11,4 @@ VERSION_BASE=
 WEBSITE=em.ca
 WEBDIR=www/supervise-scripts
 RPMUPLOAD="incoming.redhat.com/libc6"
-LIST="bgware@lists.em.ca rpms@lists.em.ca log@list.cr.yp.to"
+LIST="bgware@lists.em.ca rpms@lists.em.ca" # log@list.cr.yp.to
