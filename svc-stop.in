@@ -4,10 +4,7 @@ if [ "$1" = -q ]; then
   shift
 fi
 
-if [ "$1X" = X ]; then
-  echo "usage: svc-stop [-q] service" >&2
-  exit 1
-fi
+usage $# 1 1 "[-1] service"
 
 svc="$1"
 

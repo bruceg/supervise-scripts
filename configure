@@ -24,7 +24,17 @@ process() {
     echo 'PATH="$PATH:/usr/local/bin"'
     echo 'export PATH'
     echo 'cd "${SVSCANDIR-/service}"'
-    echo 'fatal() { echo "'$2': Fatal error: $@" >&2; exit 1 }'
+    echo 'fatal() {'
+    echo '  echo "'$2': Fatal error: $@" >&2'
+    echo '  exit 1'
+    echo '}'
+    echo 'usage() {'
+    echo '  args=$1; min=$2; max=$3; shift 3'
+    echo '  if [ $args -lt $min -o $args -gt $max ]; then'
+    echo '    echo "$0: usage: '$2' $@" >&2'
+    echo '    exit 1'
+    echo '  fi'
+    echo '}'
     echo
     tail +2 $1 | perl -p -e "$perl"
   } >$2
