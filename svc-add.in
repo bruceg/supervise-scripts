@@ -14,9 +14,9 @@ if ! echo "$svcdir" | egrep '^/' >/dev/null 2>&1; then
 fi
 
 if [ "X$2" = X ]; then
-  svcname="$2"
-else
   svcname="`basename "$svcdir"`"
+else
+  svcname="$2"
 fi
 
 if [ -e "$svcname" ]; then
