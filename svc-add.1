@@ -4,6 +4,9 @@ svc-add - Add a svscan service
 .SH SYNOPSIS
 .P
 .B svc-add
+[
+.B -d
+]
 .I SERVICE
 [
 .I DIRECTORY
@@ -18,6 +21,11 @@ The service directory defaults to
 but may be overridden by the
 .I DIRECTORY
 parameter.
+.SH OPTIONS
+.TP
+.B -d
+Mark the service as being down initially so that svscan won't start it
+automatically.
 .SH EXAMPLES
 Add the
 .I /var/service/qmail
