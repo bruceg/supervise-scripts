@@ -28,7 +28,6 @@ make prefix=$RPM_BUILD_ROOT/usr install
 %post
 if ! grep '^SV:' /etc/inittab >/dev/null 2>&1; then
   echo "SV:23456:respawn:/usr/bin/svscan-start /service" >>/etc/inittab
-  kill -HUP 1
 fi
 
 %clean
