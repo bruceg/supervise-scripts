@@ -22,14 +22,14 @@ fi
 
 # Look for the magic "rc" lines in the inittab
 
-if grep '^SV:.*svscan-start' "$filename" >/dev/null 2>&1 || \
-   grep '^SX:.*svscan-stopall' "$filename" >/dev/null 2>&1
+if egrep '^SV:.*svscan-start' "$filename" >/dev/null 2>&1 || \
+   egrep '^SX:.*svscan-stopall' "$filename" >/dev/null 2>&1
 then
   echo "$0: '$filename' appears to already have the svscan lines in it."
   exit 0
 fi
 
-lineno=`grep -n '^[^:]*:0:wait:.*rc' "$filename" | cut -d: -f1`
+lineno=`egrep -n '^[^:]*:0:wait:.*rc' "$filename" | cut -d: -f1 | head -1`
 if [ -z "$lineno" ]
 then
   echo "$0: Couldn't find the first 'rc' line in '$filename'."
