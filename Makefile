@@ -51,4 +51,4 @@ rpms: dist
 	mv $(HOME)/redhat/RPMS/noarch/$(distdir)-*.noarch.rpm .
 
 clean:
-	for file in sv*.in; do basename $$file .in; done | xargs $(RM)
+	for file in svc-*.in svscan-*.in; do basename $$file .in; done | xargs $(RM)
