@@ -30,14 +30,17 @@ automatically.
 Add the
 .I /var/service/qmail
 service:
+
 .EX
 svc-add qmail
 .EE
 .P
 Add the dnscache service from
-.IR /etc/dnscache :
+.IR /etc/dnscache
+without starting it:
+
 .EX
-svc-add dnscache /etc/dnscache
+svc-add -d dnscache /etc/dnscache
 .EE
 .SH ENVIRONMENT
 .TP
