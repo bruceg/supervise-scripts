@@ -21,7 +21,7 @@ DIST = $(DOCS) $(MAN1S) Makefile configure template.sh *.in \
 	svscan-add-to-inittab svscan-start svscan-stopall
 
 all: configure
-	env BINDIR=$(bindir) ./configure sv*.in
+	env BINDIR=$(bindir) ./configure
 
 install: all
 	$(installdir) $(install_prefix)$(bindir)
