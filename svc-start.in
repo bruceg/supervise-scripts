@@ -42,7 +42,7 @@ start() {
   rm -f "$1/down"
 
   if ! svok "$1"; then
-    echon "(waiting for supervise"
+    echon "(supervise"
     count=1
     until svok "$1"; do
       echon .
