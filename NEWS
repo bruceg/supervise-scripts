@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------
+Changes in version 3.1
+- Split off the functionality from "svc-start" that adds a service into
+  /service into the "svc-add" script.
+- Split off the functionality from "svc-stop" that removes a service
+  from /service into the "svc-remove" script.
+- Wrote a script to add the svscan lines to the inittab, so that they
+  properly get inserted before the rc# scripts get run, as well as to
+  add an entry that stops services when svscan exits.
+- Made svscan-start start svscan with input and output redirected to
+  /dev/console.
+-------------------------------------------------------------------------------
 Changes in version 3.0
 - Start svscan (in /service) from init for maximum reliability.
 - Populate /service with symlinks only.
