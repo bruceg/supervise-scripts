@@ -3,8 +3,8 @@ VERSION = 3.1
 
 install_prefix =
 prefix = /usr/local
-bindir = $(install_prefix)$(prefix)/bin
-mandir = $(install_prefix)$(prefix)/man
+bindir = $(prefix)/bin
+mandir = $(prefix)/man
 man1dir = $(mandir)/man1
 
 install = install
@@ -24,11 +24,11 @@ all: configure
 	sh configure svc-*.in
 
 install: all
-	$(installdir) $(bindir)
-	$(installbin) $(SCRIPTS) $(bindir)
+	$(installdir) $(install_prefix)$(bindir)
+	$(installbin) $(SCRIPTS) $(install_prefix)$(bindir)
 
-	$(installdir) $(man1dir)
-	$(installsrc) $(MAN1S) $(man1dir)
+	$(installdir) $(install_prefix)$(man1dir)
+	$(installsrc) $(MAN1S) $(install_prefix)$(man1dir)
 
 install-config: install ./svscan-add-to-inittab
 	$(installdir) /service
