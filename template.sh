@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-PATH="$PATH:/usr/local/bin"
+PATH="/bin:/usr/bin:/usr/local/bin:$PATH"
 export PATH
 cd "${SVSCANDIR-/service}"
 
