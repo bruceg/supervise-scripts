@@ -7,19 +7,26 @@ svc-add - Add a svscan service.
 [
 .B -d
 ]
-.I SERVICE
-[
 .I DIRECTORY
+[
+.I SERVICE
 ]
 .SH DESCRIPTION
 .B svc-add
-adds the named service to the
+adds a named service to the
 .I /service
 directory by creating a symbolic link there to the service directory.
 The service directory defaults to
-.I /var/service/SERVICE
-but may be overridden by the
+.I /var/service/DIRECTORY
+if
 .I DIRECTORY
+contains no slashes.
+The service name that is created in
+.I /service
+defaults to everything following the last slash (if any) in
+.IR DIRECTORY ,
+but may be overridden by the
+.I SERVICE
 parameter.
 .SH OPTIONS
 .TP
@@ -28,11 +35,11 @@ Mark the service as being down initially so that svscan won't start it
 automatically.
 .SH EXAMPLES
 Add the
-.I /var/service/qmail
+.I /var/service/foo
 service:
 
 .EX
-svc-add qmail
+svc-add foo
 .EE
 .P
 Add the dnscache service from
@@ -40,8 +47,17 @@ Add the dnscache service from
 without starting it:
 
 .EX
-svc-add -d dnscache /etc/dnscache
+svc-add -d /etc/dnscache
 .EE
+.P
+Add the tinydns service from
+.I /etc/tinydns
+and name it
+.I dnsd
+
+.EE
+svc-add /etc/tinydns dnsd
+.EX
 .SH ENVIRONMENT
 .TP
 .B SVCLOCKDIR
@@ -54,6 +70,5 @@ If set, this overrides the default of
 .I /service
 for the directory into which the services should be linked.
 .SH NOTES
-This script does not activate the service.
-However, if the service has not been marked down, it will be started by
-svscan.
+This script does not activate the service.  However, unless the
+service has been marked down, it will be started by svscan.
