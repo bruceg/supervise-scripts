@@ -3,7 +3,7 @@ version 3.4
 2002-04-22
 Copyright (C) 2002
 Bruce Guenter <bruceg@em.ca>
-http://em.ca/~bruceg/supervise-scripts/
+http://untroubled.org/supervise-scripts/
 
 This package is a set of scripts that may be useful for starting and
 stopping programs that are managed by supervise and svscan, which are
@@ -12,7 +12,7 @@ part of the daemontools package.
 daemontools was written by D. J. Bernstein <djb@pobox.com> and can be
 found at http://cr.yp.to/daemontools.html
 I have source and binary RPMs available at
-http://em.ca/~bruceg/rpms/daemontools/
+http://untroubled.org/rpms/daemontools/
 
 Installing
 ----------
