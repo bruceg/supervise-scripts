@@ -1,7 +1,7 @@
 Name: supervise-scripts
 Summary: Utility scripts for use with supervise and svscan.
 Version: %VERSION%
-Release: 0
+Release: 1
 Copyright: GPL
 Group: Utilities/System
 Source: http://em.ca/~bruceg/supervise-scripts/supervise-scripts-%VERSION%.tar.gz
@@ -10,6 +10,10 @@ BuildArch: noarch
 URL: http://em.ca/~bruceg/supervise-scripts/
 Packager: Bruce Guenter <bruceg@em.ca>
 Requires: daemontools = 0.70
+Requires: fileutils
+Requires: grep
+Requires: sh-utils
+Requires: textutils
 
 %description
 A set of scripts for handling programs managed with supervise and svscan.
@@ -27,9 +31,7 @@ mkdir -p $RPM_BUILD_ROOT/service
 make prefix=$RPM_BUILD_ROOT/usr install
 
 %post
-if ! grep '^SV:' /etc/inittab >/dev/null 2>&1; then
-  echo "SV:23456:respawn:/usr/bin/svscan-start /service" >>/etc/inittab
-fi
+/usr/bin/svscan-add-to-inittab
 
 %clean
 rm -rf $RPM_BUILD_ROOT
