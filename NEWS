@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
+Changes in version 3.4
+- Added a svc-multilog tool to manage configuring multilog in a uniform
+  manner.
+-------------------------------------------------------------------------------
 Changes in version 3.3
 - Fixed a syntax error in svscan-add-to-inittab that affected
   (primarily) RedHat 7 systems.
