@@ -1,4 +1,5 @@
-supervise-scripts 3.0
+supervise-scripts
+version 3.0
 2000-11-21
 Copyright (C) 2000
 Bruce Guenter <bruceg@em.ca>
@@ -42,11 +43,12 @@ printing a "." for each second it waits.  svc-waitdown waits for a
 service to stop running.
 
 svc-start starts a service by:
-- setting up a link in /service to /var/service/SERVICE if one does
-  not exist
-- if a supervise on the service's log is running, start it
+- setting up a link in /service to /var/service/SERVICE
+- wait for supervise to start on the service's log
+- force up the service's log
 - wait for the service's log to come up
-- if a supervise on the service is running, start it
+- wait for supervise to start on the service itself
+- force up the service
 - wait for the service to come up
 
 svc-stop stops a service and waits for it to stop running by:
@@ -72,34 +74,8 @@ svc-waitup and svc-waitdown will timeout after $SVCTIMEOUT seconds, or
 svc-start and svc-stop make their symlinks into the directory named by
 the contents of $SVSCANDIR, or /service if it is not set.
 
-Change Log
-----------
-
-Changes in version 3.0:
-- Start svscan (in /service) from init for maximum reliability.
-- Populate /service with symlinks only.
-
-Changes in version 2.4:
-- Added configure script to handle "echo -n" vs "echo \c" differences.
-
-Changes in version 2.3:
-- Rewrote some non-portable shell constructs.
-
-Changes in version 2.2:
-- Moved from the use of /var/lock/svc to having everything in
-  /var/service.
-- Assume that all the supervise scripts start up on boot, in the "down"
-  status.
-- Overhaul of svc-start and svc-stop to accomplish the above.
-
-Changes in version 2.1:
-- Fixed a typo in svc-start that prevented it from starting up the "log"
-  service properly.
-
-Changes in version 2.0:
-- Adapted to daemontools 0.60, with svscan started at boot, and services
-  linked into /var/service
-- Added a simple year-2000 compliance statement.
+Copyright
+---------
 
     This package is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
