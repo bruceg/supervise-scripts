@@ -1,6 +1,6 @@
 supervise-scripts
-version 3.0
-2000-11-21
+version 3.1
+2000-11-30
 Copyright (C) 2000
 Bruce Guenter <bruceg@em.ca>
 http://em.ca/~bruceg/supervise-scripts/
@@ -32,47 +32,24 @@ and up.  No changes to startup scripts should be necessary.
 You will, however, need to ensure that the old svscan process is
 stopped.  Doing so will also stop all running services.
 
-Tool Descriptions
------------------
+Intended Usage
+--------------
 
-svc-isup checks if a service is running by filtering the output of svc.
-svc-isdown checks if a service is not running.
+Create a new service directory somewhere other than /service.  Set up a
+"run" script, and a "log" directory with its own "run" script if
+appropriate.
 
-svc-waitup waits for a service to start running, according to svc-isup,
-printing a "." for each second it waits.  svc-waitdown waits for a
-service to stop running.
+Use "svc-add" to add the new service into /service for the first time.
+Add the "-d" option if you don't want it to run right away (this is the
+equivalent of doing "chkconfig --add" on SysVinit systems).
 
-svc-start starts a service by:
-- setting up a link in /service to /var/service/SERVICE
-- wait for supervise to start on the service's log
-- force up the service's log
-- wait for the service's log to come up
-- wait for supervise to start on the service itself
-- force up the service
-- wait for the service to come up
+Use "svc-start" to start the service the first time.  If you reboot, it
+will be automatically restarted without any need for intervention.
 
-svc-stop stops a service and waits for it to stop running by:
-- marking the service as down
-- running svc to down the service
-- waiting for the service to come down
-- marking the service's log as down
-- running svc to down the service's log
-- waiting for the service's log to come down
-- if the service is symlinked into /service:
-  - removing the symlink
-  - stopping the supervise process
+Use "svc-stop" if you need to stop the service (for maintenance).  If
+you reboot after doing this, the service will not be restarted.
 
-svc-status a message regarding the status of a service and its log
-service.
-
-All of the scripts change directory into "$SVSCANDIR", or /service
-if it is not set, before executing.
-
-svc-waitup and svc-waitdown will timeout after $SVCTIMEOUT seconds, or
-15 if it is not set.
-
-svc-start and svc-stop make their symlinks into the directory named by
-the contents of $SVSCANDIR, or /service if it is not set.
+Use "svc-remove" before uninstalling the software.
 
 Copyright
 ---------
