@@ -1,8 +1,19 @@
 #!/bin/sh
 set -e
+
+fatal() {
+  echo "svc-start: Fatal error: $@" >&2
+  exit 1
+}
+
+if [ "$1" = -q ]; then
+  exec >/dev/null
+  shift
+fi
+
 if [ "X$1" = X ]; then
-	echo "usage: svc-start service"
-	exit 1
+  echo "usage: svc-start [-q] service" >&2
+  exit 1
 fi
 
 svc="$1"
@@ -12,15 +23,13 @@ PATH="$PATH:/usr/local/bin"
 export PATH
 
 if ! [ -e "$svc" ]; then
-  echo "Service '$svc' does not exist."
-  exit 1
+  fatal "Service '$svc' does not exist."
 fi
 
 start() {
   # Check the "run" file
   if [ ! -e "$1/run" ]; then
-    echo "run file does not exist!"
-    exit 1
+    fatal "'$1/run' file does not exist!"
   fi
 
   rm -f "$1/down"
@@ -33,8 +42,8 @@ start() {
       sleep 1
       let count=count+1
       if [ $count -gt ${SVCTIMEOUT-15} ]; then
-        echo ") supervise did not start!"
-        exit 1
+        echon ") "
+	fatal "supervise for '$1' did not start!"
       fi
     done
     echon ") "

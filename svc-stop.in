@@ -1,8 +1,19 @@
 #!/bin/sh
 set -e
+
+fatal() {
+  echo "svc-stop: Fatal error: $@" >&2
+  exit 1
+}
+
+if [ "$1" = -q ]; then
+  exec >/dev/null
+  shift
+fi
+
 if [ "$1X" = X ]; then
-	echo usage: svc-stop service
-	exit 1
+  echo "usage: svc-stop [-q] service" >&2
+  exit 1
 fi
 
 svc="$1"
@@ -11,8 +22,7 @@ PATH="$PATH:/usr/local/bin"
 export PATH
 
 if ! [ -d "$svc" -o -L "$svc" ]; then
-  echo "Service '$svc' does not exist."
-  exit 1
+  fatal "Service '$svc' does not exist."
 fi
 
 stop() {
@@ -22,8 +32,7 @@ stop() {
     if svc-waitdown "$1"; then
       echon "$1 "
     else
-      echo "Failed!"
-      exit 1
+      fatal "Failed to stop '$1'."
     fi
   else
     echon "$1 (already down) "
