@@ -3,16 +3,12 @@ fatal() {
   echo "svc-remove: Fatal:" "$@"
   exit 1
 }
-set -e
 if [ "$1X" = X ]; then
 	fatal usage: svc-remove service
 	exit 1
 fi
 
 svc="$1"
-cd ${SVSCANDIR-/service}
-PATH="$PATH:/usr/local/bin"
-export PATH
 
 svc-stop "$svc"
 

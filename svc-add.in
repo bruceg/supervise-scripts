@@ -4,8 +4,6 @@ fatal() {
   exit 1
 }
 
-set -e
-
 if [ "$1" = -d ]; then
   down=true
   shift
@@ -23,10 +21,6 @@ if [ "X$2" = X ]; then
 else
   svcdir="$2"
 fi
-
-cd "${SVSCANDIR-/service}"
-PATH="$PATH:/usr/local/bin"
-export PATH
 
 if [ -e "$svc" ]; then
   fatal "Service '$svc' is already set up."

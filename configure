@@ -18,7 +18,15 @@ case `echo 'a\c'` in
 esac
 
 process() {
-  perl -p -e "$perl" <$1 >$2
+  {
+    echo '#!/bin/sh'
+    echo 'set -e'
+    echo 'PATH="$PATH:/usr/local/bin"'
+    echo 'export PATH'
+    echo 'cd "${SVSCANDIR-/service}"'
+    echo
+    tail +2 $1 | perl -p -e "$perl"
+  } >$2
   chmod +x $2
 }
 

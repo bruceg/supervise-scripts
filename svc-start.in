@@ -1,6 +1,4 @@
 #!/bin/sh
-set -e
-
 fatal() {
   echo "svc-start: Fatal error: $@" >&2
   exit 1
@@ -17,10 +15,6 @@ if [ "X$1" = X ]; then
 fi
 
 svc="$1"
-
-cd "${SVSCANDIR-/service}"
-PATH="$PATH:/usr/local/bin"
-export PATH
 
 if ! [ -e "$svc" ]; then
   fatal "Service '$svc' does not exist."
