@@ -56,8 +56,8 @@ fi
 {
   let lineno=lineno-1
   catit | head -$lineno
-  echo 'SV:2345:respawn:/usr/bin/svscan-start /service'
-  echo 'SX:S016:wait:/usr/bin/svscan-stopall /service'
+  echo 'SV:2345:respawn:@BINDIR@/svscan-start /service'
+  echo 'SX:S016:wait:@BINDIR@/svscan-stopall /service'
   let lineno=lineno+1
   catit | tail +$lineno
 } >"$tmpfile"
