@@ -1,0 +1,29 @@
+.TH svc-remove 1
+.SH NAME
+svc-remove - Remove a svscan service
+.SH SYNOPSIS
+.P
+.B svc-remove
+.I SERVICE
+.SH DESCRIPTION
+.B svc-remove
+removes the named service from the
+.I /service
+directory by removeing the symbolic link there.
+After removing the symbolic link, it stops any supervise tasks currently
+running on the service.
+.I DIRECTORY
+parameter.
+.SH ENVIRONMENT
+.TP
+.B SVCLOCKDIR
+If set, this overrides the default of
+.I /var/service
+for the default service directory base path.
+.TP
+.B SVSCANDIR
+If set, this overrides the default of
+.I /service
+for the directory into which the services should be linked.
+.SH NOTES
+This scripts does not mark the service as down.

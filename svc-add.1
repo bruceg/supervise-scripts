@@ -1,0 +1,48 @@
+.TH svc-add 1
+.SH NAME
+svc-add - Add a svscan service
+.SH SYNOPSIS
+.P
+.B svc-add
+.I SERVICE
+[
+.I DIRECTORY
+]
+.SH DESCRIPTION
+.B svc-add
+adds the named service to the
+.I /service
+directory by creating a symbolic link there to the service directory.
+The service directory defaults to
+.I /var/service/SERVICE
+but may be overridden by the
+.I DIRECTORY
+parameter.
+.SH EXAMPLES
+Add the
+.I /var/service/qmail
+service:
+.EX
+svc-add qmail
+.EE
+.P
+Add the dnscache service from
+.IR /etc/dnscache :
+.EX
+svc-add dnscache /etc/dnscache
+.EE
+.SH ENVIRONMENT
+.TP
+.B SVCLOCKDIR
+If set, this overrides the default of
+.I /var/service
+for the default service directory base path.
+.TP
+.B SVSCANDIR
+If set, this overrides the default of
+.I /service
+for the directory into which the services should be linked.
+.SH NOTES
+This script does not activate the service.
+However, if the service has not been marked down, it will be started by
+svscan.
