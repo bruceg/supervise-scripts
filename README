@@ -1,0 +1,82 @@
+supervise-scripts 2.3
+2000-01-12
+Copyright (C) 2000
+Bruce Guenter <bruceg@em.ca>
+http://em.ca/~bruceg/supervise-scripts/
+
+This package is a set of scripts that may be useful for starting and
+stopping programs that are managed by supervise and svscan, which are
+part of the daemontools package.
+
+daemontools was written by D. J. Bernstein <djb@pobox.com> and can be
+found at http://www.pobox.com/~djb/daemontools.html
+I have a source RPM (no binaries because of copying restrictions)
+available at http://em.ca/~bruceg/rpms/daemontools/
+
+svc-isup checks if a service is running by filtering the output of svc.
+svc-isdown checks if a service is not running.
+
+svc-waitup waits for a service to start running, according to svc-isup,
+printing a "." for each second it waits.  svc-waitdown waits for a
+service to stop running.
+
+svc-start starts a service by:
+- setting up a link in /var/service to /var/lock/svc/SERVICE if one does
+  not exist
+- if a supervise on the service's log is running, start it
+- wait for the service's log to come up
+- if a supervise on the service is running, start it
+- wait for the service to come up
+
+svc-stop stops a service and waits for it to stop running by:
+- marking the service as down
+- running svc to down the service
+- waiting for the service to come down
+- marking the service's log as down
+- running svc to down the service's log
+- waiting for the service's log to come down
+
+svc-status a message regarding the status of a service and its log
+service.
+
+All of the scripts change directory into "$SVSCANDIR", or /var/service
+if it is not set, before executing.
+
+svc-waitup and svc-waitdown will timeout after $SVCTIMEOUT seconds, or
+15 if it is not set.
+
+svc-start and svc-stop make their symlinks into the directory named by
+the contents of $SVSCANDIR, or /var/service if it is not set.
+
+Changes in version 2.3:
+- Rewrote some non-portable shell constructs.
+
+Changes in version 2.2:
+- Moved from the use of /var/lock/svc to having everything in
+  /var/service.
+- Assume that all the supervise scripts start up on boot, in the "down"
+  status.
+- Overhaul of svc-start and svc-stop to accomplish the above.
+
+Changes in version 2.1:
+- Fixed a typo in svc-start that prevented it from starting up the "log"
+  service properly.
+
+Changes in version 2.0:
+- Adapted to daemontools 0.60, with svscan started at boot, and services
+  linked into /var/service
+- Added a simple year-2000 compliance statement.
+
+    This package is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This package is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this package; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.

@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+if [ "$1X" = X ]; then
+	echo usage: svc-stop service
+	exit 1
+fi
+
+echo -n "Stopping $1: "
+cd ${SVSCANDIR-/var/service}
+
+stop() {
+  touch "$1"/down
+  if svc-isup "$1"; then
+    svc -d "$1"
+    if svc-waitdown "$1"; then
+      echo -n " $1"
+    else
+      echo " Failed!"
+      exit 1
+    fi
+  else
+    echo -n " $1 (already down)"
+  fi
+}
+
+stop "$1"
+
+if [ -d "$1/log" ]; then
+  stop "$1/log"
+fi
+
+echo " done."

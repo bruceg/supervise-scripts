@@ -1,0 +1,6 @@
+This package is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+This package uses time only to compute a timeout interval.  No year
+digit or date manipulation is done.  There are no year 2000 issues.
