@@ -1,0 +1,31 @@
+#!/bin/sh
+fatal() {
+  echo "svc-remove: Fatal:" "$@"
+  exit 1
+}
+set -e
+if [ "$1X" = X ]; then
+	fatal usage: svc-remove service
+	exit 1
+fi
+
+svc="$1"
+cd ${SVSCANDIR-/service}
+PATH="$PATH:/usr/local/bin"
+export PATH
+
+svc-stop "$svc"
+
+if ! [ -L "$svc" ]; then
+  fatal "Service '$svc' is not symlinked into /service and can't be removed."
+fi
+
+# Remove the symlink without loosing track of where it points to
+cd "$svc"
+rm ${SVSCANDIR-/service}/"$svc"
+
+# Stop the supervise tasks
+if [ -d log ]; then
+  svc -dx log
+fi
+svc -dx .
