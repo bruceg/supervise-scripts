@@ -2,4 +2,16 @@
 PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/bin:/bin
 exec </dev/console
 exec >/dev/console 2>&1
+
+# Make sure that all services with a log subdirectory get tagged as such.
+for dir in "$@"; do
+  if [ -d "$dir" ]; then
+    for svc in "$dir"/*; do
+      if [ -d "$svc/log" ]; then
+        chmod +t "$svc"
+      fi
+    done
+  fi
+done
+
 exec env - PATH=$PATH svscan "$@"
