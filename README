@@ -1,5 +1,5 @@
-supervise-scripts 2.3
-2000-01-12
+supervise-scripts 2.4
+2000-03-07
 Copyright (C) 2000
 Bruce Guenter <bruceg@em.ca>
 http://em.ca/~bruceg/supervise-scripts/
@@ -9,9 +9,9 @@ stopping programs that are managed by supervise and svscan, which are
 part of the daemontools package.
 
 daemontools was written by D. J. Bernstein <djb@pobox.com> and can be
-found at http://www.pobox.com/~djb/daemontools.html
-I have a source RPM (no binaries because of copying restrictions)
-available at http://em.ca/~bruceg/rpms/daemontools/
+found at http://cr.yp.to/daemontools.html
+I have source and binary RPMs available at
+http://em.ca/~bruceg/rpms/daemontools/
 
 svc-isup checks if a service is running by filtering the output of svc.
 svc-isdown checks if a service is not running.
@@ -47,6 +47,9 @@ svc-waitup and svc-waitdown will timeout after $SVCTIMEOUT seconds, or
 
 svc-start and svc-stop make their symlinks into the directory named by
 the contents of $SVSCANDIR, or /var/service if it is not set.
+
+Changes in version 2.4:
+- Added configure script to handle "echo -n" vs "echo \c" differences.
 
 Changes in version 2.3:
 - Rewrote some non-portable shell constructs.

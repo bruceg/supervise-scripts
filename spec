@@ -8,7 +8,7 @@ Source: http://em.ca/~bruceg/supervise-scripts/supervise-scripts-%VERSION%.tar.g
 BuildRoot: /tmp/supervise-scripts-root
 URL: http://em.ca/~bruceg/supervise-scripts/
 Packager: Bruce Guenter <bruceg@em.ca>
-Requires: daemontools = 0.61-2
+Requires: daemontools = 0.70
 
 %description
 A set of scripts for handling programs managed with supervise and svscan.
@@ -17,7 +17,6 @@ A set of scripts for handling programs managed with supervise and svscan.
 %setup
 
 %build
-#make
 
 %install
 rm -fr $RPM_BUILD_ROOT
