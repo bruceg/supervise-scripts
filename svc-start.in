@@ -1,35 +1,19 @@
 #!/bin/sh
 set -e
 if [ "X$1" = X ]; then
-	echo "usage: svc-start service [svc-directory]"
+	echo "usage: svc-start service"
 	exit 1
 fi
 
 svc="$1"
-if [ "X$2" = X ]; then
-  svcdir="${SVCLOCKDIR-/var/service}/$svc"
-else
-  svcdir="$2"
-fi
 
 cd "${SVSCANDIR-/service}"
 PATH="$PATH:/usr/local/bin"
 export PATH
 
-if ! [ -e "$svc" -o -e "$svcdir" ]; then
+if ! [ -e "$svc" ]; then
   echo "Service '$svc' does not exist."
   exit 1
-fi
-
-if [ ! -d "$svc" ]; then
-  if [ -d "$svcdir" ]; then
-    # Make sure that the symlink for svscan exists
-    rm -f "$svc"
-    ln -s "$svcdir" "$svc"
-  else
-    echo "Service '$svc' is improperly set up."
-    exit 1
-  fi
 fi
 
 start() {

@@ -1,0 +1,37 @@
+#!/bin/sh
+fatal() {
+  echo "svc-add: Fatal:" "$@"
+  exit 1
+}
+
+set -e
+if [ "X$1" = X ]; then
+	fatal "usage: svc-start service [svc-directory]"
+fi
+
+svc="$1"
+if [ "X$2" = X ]; then
+  svcdir="${SVCLOCKDIR-/var/service}/$svc"
+else
+  svcdir="$2"
+fi
+
+cd "${SVSCANDIR-/service}"
+PATH="$PATH:/usr/local/bin"
+export PATH
+
+if [ -e "$svc" ]; then
+  fatal "Service '$svc' is already set up."
+fi
+
+if ! [ -d "$svcdir" ]; then
+  fatal "'$svcdir' is not a directory."
+fi
+
+if [ -d "$svcdir/log" ]; then
+  chmod +t "$svcdir"
+else
+  chmod -t "$svcdir"
+fi
+
+ln -s "$svcdir" "svc"
