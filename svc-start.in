@@ -49,8 +49,7 @@ start() {
 echon "Starting $svc: "
 
 # Control the log process first, so that all messages are logged ...
-if [ -d "$svc/log" ]; then
-  chmod +t "$svc"
+if [ -k "$svc" ]; then
   start "$svc/log"
 fi
 
