@@ -5,8 +5,16 @@ fatal() {
 }
 
 set -e
+
+if [ "$1" = -d ]; then
+  down=true
+  shift
+else
+  down=false
+fi
+
 if [ "X$1" = X ]; then
-	fatal "usage: svc-start service [svc-directory]"
+  fatal "usage: svc-start [-d] service [svc-directory]"
 fi
 
 svc="$1"
@@ -28,8 +36,15 @@ if ! [ -d "$svcdir" ]; then
   fatal "'$svcdir' is not a directory."
 fi
 
-if [ -d "$svcdir/log" ]; then
+if $down; then
+  touch "$svcdir"/down
+fi
+
+if [ -d "$svcdir"/log ]; then
   chmod +t "$svcdir"
+  if $down; then
+    touch "$svcdir"/log/down
+  fi
 else
   chmod -t "$svcdir"
 fi
