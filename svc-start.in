@@ -1,0 +1,67 @@
+#!/bin/sh
+set -e
+if [ "X$1" = X ]; then
+	echo "usage: svc-start service [program [args...]]"
+	exit 1
+fi
+svc="$1"
+shift
+
+echon "Starting $svc: "
+
+cd "${SVSCANDIR-/service}"
+
+svcdir="${SVCLOCKDIR-/var/service}/$svc"
+
+if ! [ -e "$svc" -o -e "$svcdir" ]; then
+  echo "Service '$svc' doesn't exist."
+  exit 1
+fi
+
+if [ ! -d "$svc" ]; then
+  if [ -d "$svcdir" ]; then
+    # Make sure that the symlink for svscan exists
+    rm -f "$svc"
+    ln -s "$svcdir" "$svc"
+  else
+    echo "Service '$svc' is improperly set up."
+    exit 1
+  fi
+fi
+
+start() {
+  # Check the "run" file
+  if [ ! -e "$1/run" ]; then
+    echo " run file does not exist!"
+    exit 1
+  fi
+
+  rm -f "$1/down"
+
+  echon " $1"
+
+  count=1
+  until svok "$1"; do
+    echon .
+    sleep 1
+    let count=count+1
+    if [ $count -gt ${SVCTIMEOUT-15} ]; then
+      echo " supervise did not start!"
+      exit 1
+    fi
+  done
+
+  svc -u "$1"
+  svc-waitup "$1"
+}
+
+# Control the log process first, so that all messages are logged ...
+if [ -d "$svc/log" ]; then
+  chmod +t "$svc"
+  start "$svc/log"
+fi
+
+# ... and then the main process.
+start "$svc"
+
+echo " done."

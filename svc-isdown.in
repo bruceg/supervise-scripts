@@ -4,5 +4,5 @@ if [ "X$1" = X ]; then
 	echo usage: svc-isdown service
 	exit 1
 fi
-cd ${SVSCANDIR-/var/service}
+cd ${SVSCANDIR-/service}
 svstat "$1" 2>/dev/null | fgrep -v ' up ' >/dev/null

@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/env - PATH=/usr/local/bin:/usr/sbin:/usr/bin:/bin svscan "$@"

@@ -4,6 +4,6 @@ if [ "X$1" = X ]; then
 	echo usage: svc-isup service
 	exit 1
 fi
-cd ${SVSCANDIR-/var/service}
+cd ${SVSCANDIR-/service}
 svok "$1"
 svstat "$1" 2>/dev/null | fgrep ' up ' >/dev/null

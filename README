@@ -21,7 +21,7 @@ printing a "." for each second it waits.  svc-waitdown waits for a
 service to stop running.
 
 svc-start starts a service by:
-- setting up a link in /var/service to /var/lock/svc/SERVICE if one does
+- setting up a link in /service to /var/lock/svc/SERVICE if one does
   not exist
 - if a supervise on the service's log is running, start it
 - wait for the service's log to come up
@@ -39,14 +39,18 @@ svc-stop stops a service and waits for it to stop running by:
 svc-status a message regarding the status of a service and its log
 service.
 
-All of the scripts change directory into "$SVSCANDIR", or /var/service
+All of the scripts change directory into "$SVSCANDIR", or /service
 if it is not set, before executing.
 
 svc-waitup and svc-waitdown will timeout after $SVCTIMEOUT seconds, or
 15 if it is not set.
 
 svc-start and svc-stop make their symlinks into the directory named by
-the contents of $SVSCANDIR, or /var/service if it is not set.
+the contents of $SVSCANDIR, or /service if it is not set.
+
+Changes in version 3.0:
+- Start svscan (in /service) from init for maximum reliability.
+- Populate /service with symlinks only.
 
 Changes in version 2.4:
 - Added configure script to handle "echo -n" vs "echo \c" differences.

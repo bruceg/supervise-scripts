@@ -7,11 +7,11 @@ installbin = $(install) -m 755
 installdir = $(install) -d
 
 PACKAGE = supervise-scripts
-VERSION = 2.5
+VERSION = 3.0
 
 SCRIPTS = svc-isdown svc-isup svc-waitdown svc-waitup \
 	svc-start svc-stop svc-status \
-	svscan.init
+	svscan-start
 DOCS = COPYING README
 DIST = Makefile configure *.in $(DOCS)
 

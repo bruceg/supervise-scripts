@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-cd "${SVSCANDIR-/var/service}"
+cd "${SVSCANDIR-/service}"
 if svok "$1"; then
   svstat "$1"
   if [ -d "$1/log" ]; then
