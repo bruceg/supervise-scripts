@@ -3,13 +3,7 @@ if [ "$1" = -q ]; then
   shift
 fi
 
-usage $# 1 1 "[-q] service"
-
-svc="$1"
-
-if ! [ -e "$svc" ]; then
-  fatal "Service '$svc' does not exist."
-fi
+usage $# 1 9999 "[-q] service [service ...]"
 
 start() {
   # Check the "run" file
@@ -40,14 +34,22 @@ start() {
   echon "$1 "
 }
 
-echon "Starting $svc: "
+for svc in "$@"; do
 
-# Control the log process first, so that all messages are logged ...
-if [ -k "$svc" ]; then
-  start "$svc/log"
-fi
+  if ! [ -e "$svc" ]; then
+    fatal "Service '$svc' does not exist."
+  fi
 
-# ... and then the main process.
-start "$svc"
+  echon "Starting $svc: "
 
-echo "done."
+  # Control the log process first, so that all messages are logged ...
+  if [ -k "$svc" ]; then
+    start "$svc/log"
+  fi
+
+  # ... and then the main process.
+  start "$svc"
+
+  echo "done."
+
+done

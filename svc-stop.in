@@ -3,13 +3,7 @@ if [ "$1" = -q ]; then
   shift
 fi
 
-usage $# 1 1 "[-q] service"
-
-svc="$1"
-
-if ! [ -d "$svc" -o -L "$svc" ]; then
-  fatal "Service '$svc' does not exist."
-fi
+usage $# 1 9999 "[-q] service [service ...]"
 
 stop() {
   touch "$1"/down
@@ -25,12 +19,20 @@ stop() {
   fi
 }
 
-echon "Stopping $svc: "
+for svc in "$@"; do
 
-stop "$svc"
+  if ! [ -d "$svc" -o -L "$svc" ]; then
+    fatal "Service '$svc' does not exist."
+  fi
 
-if [ -d "$svc/log" ]; then
-  stop "$svc/log"
-fi
+  echon "Stopping $svc: "
 
-echo "done."
+  stop "$svc"
+
+  if [ -d "$svc/log" ]; then
+    stop "$svc/log"
+  fi
+
+  echo "done."
+
+done

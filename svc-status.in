@@ -1,9 +1,12 @@
-usage $# 1 1 service
-if svok "$1"; then
-  svstat "$1"
-  if [ -d "$1/log" ]; then
-    svstat "$1"/log
+usage $# 1 9999 service [service ...]
+
+for svc in "$@"; do
+  if svok "$svc"; then
+    svstat "$svc"
+    if [ -d "$svc/log" ]; then
+      svstat "$svc"/log
+    fi
+  else
+    echo "Supervise not running on $svc"
   fi
-else
-  echo "Supervise not running on $1"
-fi
+done
