@@ -2,6 +2,8 @@
 Changes in version 3.0
 - Start svscan (in /service) from init for maximum reliability.
 - Populate /service with symlinks only.
+
+Note: version 3 is backwards compatible with version 2.
 -------------------------------------------------------------------------------
 Changes in version 2.4
 - Added configure script to handle "echo -n" vs "echo \c" differences.

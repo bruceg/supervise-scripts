@@ -12,7 +12,7 @@ VERSION = 3.0
 SCRIPTS = svc-isdown svc-isup svc-waitdown svc-waitup \
 	svc-start svc-stop svc-status \
 	svscan-start
-DOCS = COPYING README
+DOCS = COPYING NEWS README
 DIST = Makefile configure *.in svscan-start $(DOCS)
 
 all: configure
