@@ -13,9 +13,11 @@ Changes in version 3.1
   non-error messages.
 - Standardized all the scripts by adding the common elements to the
   configure script.
+- Wrote man pages for the important scripts.
 
-NOTE: If you are upgrading from version 3.0, please remove the svscan
-line from your inittab and run svscan-add-to-inittab.
+NOTE: If you are upgrading from version 3.0, please make sure you run
+svscan-add-to-inittab, as install script from version 3.0 inserted the
+wrong line at the wrong place in the inittab.
 -------------------------------------------------------------------------------
 Changes in version 3.0
 - Start svscan (in /service) from init for maximum reliability.
