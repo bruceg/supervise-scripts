@@ -28,7 +28,7 @@ rm -fr $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/usr
 mkdir -p $RPM_BUILD_ROOT/service
 
-make prefix=$RPM_BUILD_ROOT/usr install
+make install_prefix=$RPM_BUILD_ROOT bindir=%{_bindir} mandir=%{_mandir} install
 
 %post
 /usr/bin/svscan-add-to-inittab
@@ -40,4 +40,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc COPYING README
 %dir /service
-/usr/bin/*
+%{_bindir}/*
+%{_mandir}/man*/*

@@ -1,10 +1,10 @@
 PACKAGE = supervise-scripts
 VERSION = 3.1
 
+install_prefix =
 prefix = /usr/local
-bindir = $(prefix)/bin
-libdir = $(prefix)/lib/supervise-scripts
-mandir = $(prefix)/man
+bindir = $(install_prefix)$(prefix)/bin
+mandir = $(install_prefix)$(prefix)/man
 man1dir = $(mandir)/man1
 
 install = install
