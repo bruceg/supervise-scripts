@@ -1,0 +1,31 @@
+.TH svc-start 1
+.SH NAME
+svc-start - Start a svscan service.
+.SH SYNOPSIS
+.B svc-start
+[
+.B -q
+]
+.I SERVICE
+.SH DESCRIPTION
+.B svc-start
+causes
+.B svscan
+to start the named service by first waiting for
+.B svscan
+to start a
+.B supervise
+task, then marking the service as up, and finally waiting the service to
+be marked as running.
+It does the above three steps on the service's log service, if it
+exists, prior to starting the service.
+.SH OPTIONS
+.TD
+.B -q
+Suppress all non-error messages.
+.SH ENVIRONMENT
+.TP
+.B SVSCANDIR
+If set, this overrides the default of
+.I /service
+for the directory into which the services should be linked.

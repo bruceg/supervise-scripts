@@ -1,0 +1,27 @@
+.TH svc-stop 1
+.SH NAME
+svc-stop - Stop a svscan service.
+.SH SYNOPSIS
+.B svc-stop
+[
+.B -q
+]
+.I SERVICE
+.SH DESCRIPTION
+.B svc-stop
+stops a service and waits for it to stop by first marking the service as
+down, then running
+.B svc
+to stop the service, and then waiting for the service to come down.
+If the service has a log service, it is stopped after the service is
+stopped.
+.SH OPTIONS
+.TD
+.B -q
+Suppress all non-error messages.
+.SH ENVIRONMENT
+.TP
+.B SVSCANDIR
+If set, this overrides the default of
+.I /service
+for the directory into which the services should be linked.
