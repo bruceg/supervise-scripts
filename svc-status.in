@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 cd "${SVSCANDIR-/service}"
+PATH="$PATH:/usr/local/bin"
+export PATH
 if svok "$1"; then
   svstat "$1"
   if [ -d "$1/log" ]; then

@@ -1,20 +1,23 @@
 #!/bin/sh
 set -e
 if [ "X$1" = X ]; then
-	echo "usage: svc-start service [program [args...]]"
+	echo "usage: svc-start service [svc-directory]"
 	exit 1
 fi
-svc="$1"
-shift
 
-echon "Starting $svc: "
+svc="$1"
+if [ "X$2" = X ]; then
+  svcdir="${SVCLOCKDIR-/var/service}/$svc"
+else
+  svcdir="$2"
+fi
 
 cd "${SVSCANDIR-/service}"
-
-svcdir="${SVCLOCKDIR-/var/service}/$svc"
+PATH="$PATH:/usr/local/bin"
+export PATH
 
 if ! [ -e "$svc" -o -e "$svcdir" ]; then
-  echo "Service '$svc' doesn't exist."
+  echo "Service '$svc' does not exist."
   exit 1
 fi
 
@@ -54,6 +57,8 @@ start() {
   svc -u "$1"
   svc-waitup "$1"
 }
+
+echon "Starting $svc: "
 
 # Control the log process first, so that all messages are logged ...
 if [ -d "$svc/log" ]; then

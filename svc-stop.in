@@ -5,8 +5,14 @@ if [ "$1X" = X ]; then
 	exit 1
 fi
 
-echon "Stopping $1: "
 cd ${SVSCANDIR-/service}
+PATH="$PATH:/usr/local/bin"
+export PATH
+
+if ! [ -d "$1" -o -L "$1" ]; then
+  echo "Service '$1' does not exist."
+  exit 1
+fi
 
 stop() {
   touch "$1"/down
@@ -23,13 +29,13 @@ stop() {
   fi
 }
 
+echon "Stopping $1: "
+
 stop "$1"
 
 if [ -d "$1/log" ]; then
   stop "$1/log"
 fi
-
-echo " done."
 
 if [ -L "$1" ]; then
   link="`readlink "$1"`"

@@ -5,5 +5,7 @@ if [ "X$1" = X ]; then
 	exit 1
 fi
 cd ${SVSCANDIR-/service}
+PATH="$PATH:/usr/local/bin"
+export PATH
 svok "$1"
 svstat "$1" 2>/dev/null | fgrep ' up ' >/dev/null
