@@ -17,7 +17,7 @@ SCRIPTS = svc-isdown svc-isup svc-waitdown svc-waitup \
 	svscan-add-to-inittab svscan-start svscan-stopall
 MAN1S = svc-add.1 svc-remove.1 svc-start.1 svc-stop.1
 DOCS = COPYING NEWS README
-DIST = $(DOCS) $(MAN1S) Makefile configure *.in \
+DIST = $(DOCS) $(MAN1S) Makefile configure template.sh *.in \
 	svscan-add-to-inittab svscan-start svscan-stopall
 
 all: configure
