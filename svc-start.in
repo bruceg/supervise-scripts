@@ -29,7 +29,7 @@ start() {
       let count=count+1
       if [ $count -gt ${SVCTIMEOUT-15} ]; then
         echon ") "
-	fatal "supervise for '$1' did not start!"
+	fatal "supervise for '$1' did not start!  Is svscan running?"
       fi
     done
     echon ") "
