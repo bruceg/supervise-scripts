@@ -6,6 +6,7 @@ Copyright: GPL
 Group: Utilities/System
 Source: http://em.ca/~bruceg/supervise-scripts/supervise-scripts-%VERSION%.tar.gz
 BuildRoot: /tmp/supervise-scripts-root
+BuildArch: noarch
 URL: http://em.ca/~bruceg/supervise-scripts/
 Packager: Bruce Guenter <bruceg@em.ca>
 Requires: daemontools = 0.70

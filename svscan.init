@@ -1,0 +1,74 @@
+#!/bin/sh
+#
+# svscan        This shell script takes care of starting and stopping
+#               svscan (the supervise scan program)
+#
+# chkconfig: 2345 11 89
+# description: svscan starts and monitors a collection of services.
+# processname: svscan
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+case "$1" in
+
+start)
+  echo -n "Starting svscan: "
+  if [ -f /var/run/svscan.pid ]; then
+    if ps h `cat /var/run/svscan.pid` >/dev/null; then
+      echo svscan already started
+      exit 0
+    fi
+  fi
+  cd /var/service
+  #for service in *; do
+  #  touch "$service"/down "$service"/log/down >/dev/null 2>&1
+  #done
+  env - PATH="$PATH" svscan &
+  echo $! > /var/run/svscan.pid
+  echo svscan
+  ;;
+
+stop)
+  echo -n "Stopping svscan: "
+  killproc svscan
+  echo
+
+  cd /var/service
+  for service in *; do
+    echo -n "Stopping service $service: "
+    if svok "$service"; then
+      svc -dx "$service"
+      echo stopped.
+    else
+      echo already stopped.
+    fi
+    if [ -d "$service/log" ]; then
+      echo -n "Stopping service $service/log: "
+      if svok "$service/log"; then
+        svc -dx "$service/log"
+        echo stopped.
+      else
+        echo already stopped.
+      fi
+    fi
+  done
+  ;;
+
+restart)
+  $0 stop
+  sleep 1
+  $0 start
+  ;;
+
+status)
+  status svscan
+  ;;
+
+*)
+  echo "Usage: svscan {start|stop|status|restart}" 1>&2
+  ;;
+
+esac
