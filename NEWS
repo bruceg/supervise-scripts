@@ -11,6 +11,8 @@ Changes in version 3.1
   /dev/console.
 - Added a "-q" flag to svc-start and svc-stop that will suppress all
   non-error messages.
+- Standardized all the scripts by adding the common elements to the
+  configure script.
 -------------------------------------------------------------------------------
 Changes in version 3.0
 - Start svscan (in /service) from init for maximum reliability.
