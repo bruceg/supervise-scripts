@@ -24,13 +24,14 @@ process() {
     echo 'PATH="$PATH:/usr/local/bin"'
     echo 'export PATH'
     echo 'cd "${SVSCANDIR-/service}"'
+    echo 'fatal() { echo "'$2': Fatal error: $@" >&2; exit 1 }'
     echo
     tail +2 $1 | perl -p -e "$perl"
   } >$2
   chmod +x $2
 }
 
-for file in svc-*.in; do
+for file in "$@"; do
   out=`basename $file .in`
   echo "Processing $file -> $out"
   process $file $out

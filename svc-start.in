@@ -1,9 +1,4 @@
 #!/bin/sh
-fatal() {
-  echo "svc-start: Fatal error: $@" >&2
-  exit 1
-}
-
 if [ "$1" = -q ]; then
   exec >/dev/null
   shift

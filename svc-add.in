@@ -1,9 +1,4 @@
 #!/bin/sh
-fatal() {
-  echo "svc-add: Fatal:" "$@"
-  exit 1
-}
-
 if [ "$1" = -d ]; then
   down=true
   shift
@@ -12,7 +7,8 @@ else
 fi
 
 if [ "X$1" = X ]; then
-  fatal "usage: svc-start [-d] service [svc-directory]"
+  echo "usage: svc-start [-d] service [svc-directory]" >&2
+  exit 1
 fi
 
 svc="$1"

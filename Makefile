@@ -21,7 +21,7 @@ DIST = $(DOCS) $(MAN1S) Makefile configure *.in \
 	svscan-add-to-inittab svscan-start svscan-stopall
 
 all: configure
-	sh configure
+	sh configure svc-*.in
 
 install: all
 	$(installdir) $(bindir)

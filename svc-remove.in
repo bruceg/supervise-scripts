@@ -1,11 +1,7 @@
 #!/bin/sh
-fatal() {
-  echo "svc-remove: Fatal:" "$@"
-  exit 1
-}
 if [ "$1X" = X ]; then
-	fatal usage: svc-remove service
-	exit 1
+  echo "usage: svc-remove service" >&2
+  exit 1
 fi
 
 svc="$1"
