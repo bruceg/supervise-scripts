@@ -2,7 +2,7 @@
 PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/bin:/bin
 exec </dev/console
 exec >/dev/console 2>&1
-cd "${1-/service}"
+cd "${1-/service}" || exit 1
 for svc in *
 do
   test -d "$svc/log" && svok "$svc/log" && svc -dx "$svc/log"
