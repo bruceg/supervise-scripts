@@ -4,14 +4,18 @@ VERSION = 3.1
 prefix = /usr/local
 bindir = $(prefix)/bin
 libdir = $(prefix)/lib/supervise-scripts
+mandir = $(prefix)/man
+man1dir = $(mandir)/man1
 
 install = install
-installbin = $(install) -m 755
+installbin = $(install) -m 555
 installdir = $(install) -d
+installsrc = $(install) -m 444
 
 SCRIPTS = svc-isdown svc-isup svc-waitdown svc-waitup \
 	svc-start svc-stop svc-status \
 	svscan-start
+MAN1S = svc-add.1 svc-remove.1
 DOCS = COPYING NEWS README
 DIST = Makefile configure *.in svscan-start $(DOCS)
 
@@ -21,6 +25,9 @@ all: configure
 install: all
 	$(installdir) $(bindir)
 	$(installbin) $(SCRIPTS) $(bindir)
+
+	$(installdir) $(man1dir)
+	$(installsrc) $(MAN1S) $(man1dir)
 
 install-config: install ./svscan-add-to-inittab
 	$(installdir) /service
