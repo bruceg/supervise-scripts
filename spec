@@ -9,7 +9,7 @@ BuildRoot: /tmp/supervise-scripts-root
 BuildArch: noarch
 URL: http://em.ca/~bruceg/supervise-scripts/
 Packager: Bruce Guenter <bruceg@em.ca>
-Requires: daemontools = 0.70
+Requires: daemontools >= 0.70-2
 Requires: fileutils
 Requires: grep
 Requires: sh-utils
