@@ -1,3 +1,5 @@
 #!/bin/sh
 PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/bin:/bin
+exec </dev/console
+exec >/dev/console 2>&1
 exec env - PATH=$PATH svscan "$@"
