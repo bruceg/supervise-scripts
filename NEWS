@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
 Changes in version 4.0
 
+- Added svc-build, for initially creating services.
 
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
