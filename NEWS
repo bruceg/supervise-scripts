@@ -4,6 +4,8 @@ Changes in version 3.5
 - svc-start, svc-stop, and svc-status can now take multiple service name
   parameters instead of just one.
 
+- Added svc-restart script, to stop-then-start multiple services.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------
