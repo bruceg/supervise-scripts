@@ -41,3 +41,7 @@ else
 fi
 
 ln -s "$svcdir" "$svcname"
+
+if "$down"; then
+  echo "Type 'svc-start $svcname' to start the service."
+fi
