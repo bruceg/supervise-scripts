@@ -1,3 +1,6 @@
+PACKAGE = supervise-scripts
+VERSION = 3.1
+
 prefix = /usr/local
 bindir = $(prefix)/bin
 libdir = $(prefix)/lib/supervise-scripts
@@ -5,9 +8,6 @@ libdir = $(prefix)/lib/supervise-scripts
 install = install
 installbin = $(install) -m 755
 installdir = $(install) -d
-
-PACKAGE = supervise-scripts
-VERSION = 3.0
 
 SCRIPTS = svc-isdown svc-isup svc-waitdown svc-waitup \
 	svc-start svc-stop svc-status \
@@ -22,11 +22,9 @@ install: all
 	$(installdir) $(bindir)
 	$(installbin) $(SCRIPTS) $(bindir)
 
-install-config: install
-	if ! grep '^SV:' /etc/inittab >/dev/null 2>&1; then \
-	  echo "SV:23456:respawn:/usr/bin/svscan-start /service" >>/etc/inittab\
-	fi
+install-config: install ./svscan-add-to-inittab
 	$(installdir) /service
+	./svscan-add-to-inittab
 
 distdir = $(PACKAGE)-$(VERSION)
 distdir:
