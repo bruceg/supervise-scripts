@@ -1,6 +1,6 @@
 PKGURL=http://em.ca/~bruceg/supervise-scripts
 LISTSUB=bgware-subscribe@lists.em.ca
-LISTURL=http://lists.em.ca/ezmlm.cgi?3
+LISTURL=http://lists.em.ca/?list=bgware
 MAKERPM=true
 NOARCH=true
 DOCS=

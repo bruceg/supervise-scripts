@@ -4,6 +4,12 @@ Changes in version 3.4
 - svc-remove now cleans up the supervise directory from the services
   after killing supervise.
 
+- svscan-start fixes the mode on all services with a log subdirectory
+  before starting svscan, to avoid startup problems.
+
+- Replaced the use of "let var=..." in the shell scripts with the more
+  portable "var=$((...))".
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------
