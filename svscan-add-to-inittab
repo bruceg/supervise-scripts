@@ -1,60 +1,67 @@
 #!/bin/sh
 set -e
 
-# Set up variables for the input file, a backup copy of the inittab, and
-# a temporary output file.
-
 filename="${1-/etc/inittab}"
 
-backup="$filename~"
-if [ -e "$backup" ]
+# Look for the svscan lines, and exit if they both exist
+
+SV_pattern='^SV:.*svscan-start'
+SX_pattern='^SX:.*svscan-stopall'
+if egrep "$SV_pattern" "$filename" >/dev/null 2>&1 &&
+   egrep "$SX_pattern" "$filename" >/dev/null 2>&1
 then
+  echo "$0: Nothing to do:"
+  echo "  '$filename' appears to already have the svscan lines in it."
+  exit 0
+fi
+
+# Set up variables for a backup copy of the inittab, and a temporary
+# output file.
+
+date=`date +%Y-%m-%d`
+backup="$filename-$date"
+if [ -e "$backup" ]; then
   echo "$0: Backup file '$backup' already exists."
   exit 1;
 fi
 
-tmpfile="${filename}.tmp"
+tmpfile="${filename}.tmp.$$"
 if [ -e "$tmpfile" ]
 then
   echo "$0: Temporary file '$tmpfile' already exists."
   exit 1
 fi
 
-# Look for the magic "rc" lines in the inittab
-
-if egrep '^SV:.*svscan-start' "$filename" >/dev/null 2>&1 || \
-   egrep '^SX:.*svscan-stopall' "$filename" >/dev/null 2>&1
-then
-  echo "$0: '$filename' appears to already have the svscan lines in it."
-  exit 0
-fi
-
-lineno=`egrep -n '^[^:]*:0:wait:.*rc' "$filename" | cut -d: -f1 | head -1`
-if [ -z "$lineno" ]
-then
-  echo "$0: Couldn't find the first 'rc' line in '$filename'."
-  exit 1;
-fi
+catit() { cat "$filename" | egrep -v "$SV_pattern" | egrep -v "$SX_pattern" }
 
 # Insert the two svscan lines between the first rc line and the rest of
 # the inittab so that svscan gets executed before the rc# scripts do.
 
+# First, find the target pattern
+lineno=`catit | egrep -n '^[^:]*:0:wait:.*rc' | cut -d: -f1 | head -1`
+if [ -z "$lineno" ]
+then
+  echo "$0: Couldn't find the search line in '$filename'."
+  exit 1;
+fi
+
+# Pre-create the temporary file
 if ! touch "$tmpfile" >/dev/null 2>&1
 then
   echo "$0: Could not create the temporary output file '$tmpfile'"
   exit 1
 fi
 
+# Splice the new lines into the old file
 {
   let lineno=lineno-1
-  head -$lineno "$filename"
-  echo "SV:2345:respawn:/usr/bin/svscan-start /service"
-  echo "SX:S016:wait:/usr/bin/svscan-stopall /service"
-  echo
+  catit | head -$lineno
+  echo 'SV:2345:respawn:/usr/bin/svscan-start /service'
+  echo 'SX:S016:wait:/usr/bin/svscan-stopall /service'
   let lineno=lineno+1
-  tail +$lineno "$filename"
+  catit | tail +$lineno
 } >"$tmpfile"
 
-# Finally, safely move the new inittab over the old one.
+# And move it over the existing file
 ln "$filename" "$backup"
 mv -f "$tmpfile" "$filename"
