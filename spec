@@ -22,6 +22,7 @@ A set of scripts for handling programs managed with supervise and svscan.
 %install
 rm -fr $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/usr
+mkdir -p $RPM_BUILD_ROOT/service
 
 make prefix=$RPM_BUILD_ROOT/usr install
 
@@ -36,5 +37,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc COPYING README
+%dir /service
 /usr/bin/*
-
