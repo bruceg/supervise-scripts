@@ -16,5 +16,11 @@ rm ${SVSCANDIR-/service}/"$svc"
 # Stop the supervise tasks
 if [ -d log ]; then
   svc -dx log
+  sleep 1
+  rm log/down log/supervise/{control,lock,ok,status}
+  rmdir log/supervise
 fi
 svc -dx .
+sleep 1
+rm down supervise/{control,lock,ok,status}
+rmdir supervise
