@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh template
 if [ "$1" = -d ]; then
   down=true
   shift

@@ -23,21 +23,15 @@ esac
 perl="$perl; s|\@BINDIR\@|$BINDIR|g"
 
 process_template() {
-  {
-    sed -e "s/%PROGRAM%/$2/g" template.sh
-    tail +2 $1 | perl -p -e "$perl"
-  } >$2
-  chmod +x $2
+  sed -e "s/%PROGRAM%/$2/g" template.sh
+  tail +2 | perl -p -e "$perl"
 }
 
 process_notemplate() {
-  perl -p -e "$perl" <$1 >$2
-  chmod +x $2
+  perl -p -e "$perl"
 }
 
 process_list() {
-  processor=$1
-  shift
   for file in "$@"
   do
     if ! [ -e $file ]
@@ -46,10 +40,15 @@ process_list() {
     else
       out=`basename $file .in`
       echo "Processing $file => $out"
-      $processor $file $out
+      if head -1 $file | grep template >/dev/null 2>&1
+      then
+        process_template <$file >$out
+      else
+        process_notemplate <$file >$out
+      fi
+      chmod +x $out
     fi
   done
 }
 
-process_list process_template svc-*.in
-process_list process_notemplate svscan-*.in
+process_list svc-*.in svscan-*.in
