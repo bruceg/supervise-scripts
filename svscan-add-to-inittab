@@ -32,7 +32,7 @@ then
   exit 1
 fi
 
-catit() { cat "$filename" | egrep -v "$SV_pattern" | egrep -v "$SX_pattern" }
+catit() { cat "$filename" | egrep -v "$SV_pattern" | egrep -v "$SX_pattern"; }
 
 # Insert the two svscan lines between the first rc line and the rest of
 # the inittab so that svscan gets executed before the rc# scripts do.
