@@ -35,27 +35,31 @@ fi
 start() {
   # Check the "run" file
   if [ ! -e "$1/run" ]; then
-    echo " run file does not exist!"
+    echo "run file does not exist!"
     exit 1
   fi
 
   rm -f "$1/down"
 
-  echon " $1"
-
-  count=1
-  until svok "$1"; do
-    echon .
-    sleep 1
-    let count=count+1
-    if [ $count -gt ${SVCTIMEOUT-15} ]; then
-      echo " supervise did not start!"
-      exit 1
-    fi
-  done
+  if ! svok "$1"; then
+    echon "(waiting for supervise"
+    count=1
+    until svok "$1"; do
+      echon .
+      sleep 1
+      let count=count+1
+      if [ $count -gt ${SVCTIMEOUT-15} ]; then
+        echo ") supervise did not start!"
+        exit 1
+      fi
+    done
+    echon ") "
+  fi
 
   svc -u "$1"
   svc-waitup "$1"
+
+  echon "$1 "
 }
 
 echon "Starting $svc: "
@@ -69,4 +73,4 @@ fi
 # ... and then the main process.
 start "$svc"
 
-echo " done."
+echo "done."

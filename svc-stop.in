@@ -5,12 +5,13 @@ if [ "$1X" = X ]; then
 	exit 1
 fi
 
+svc="$1"
 cd ${SVSCANDIR-/service}
 PATH="$PATH:/usr/local/bin"
 export PATH
 
-if ! [ -d "$1" -o -L "$1" ]; then
-  echo "Service '$1' does not exist."
+if ! [ -d "$svc" -o -L "$svc" ]; then
+  echo "Service '$svc' does not exist."
   exit 1
 fi
 
@@ -19,31 +20,31 @@ stop() {
   if svc-isup "$1"; then
     svc -d "$1"
     if svc-waitdown "$1"; then
-      echon " $1"
+      echon "$1 "
     else
-      echo " Failed!"
+      echo "Failed!"
       exit 1
     fi
   else
-    echon " $1 (already down)"
+    echon "$1 (already down) "
   fi
 }
 
-echon "Stopping $1: "
+echon "Stopping $svc: "
 
-stop "$1"
+stop "$svc"
 
-if [ -d "$1/log" ]; then
-  stop "$1/log"
+if [ -d "$svc/log" ]; then
+  stop "$svc/log"
 fi
 
-if [ -L "$1" ]; then
-  link="`readlink "$1"`"
-  rm -f "$1"
+if [ -L "$svc" ]; then
+  link="`readlink "$svc"`"
+  rm -f "$svc"
   if [ -d "$link" ]; then
     svc -dx "$link"
-    echon " supervise"
+    echon "supervise "
   fi
 fi
 
-echo " done."
+echo "done."
