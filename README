@@ -20,8 +20,8 @@ Installing
 These scripts expect svscan to be started by init.  To do this, run
 "make install-config".  After you have done this step, or if you are
 installing from the RPM, you need to make init start svscan.  You can do
-this by either rebooting, or by typing "kill -1 1" to make init re-read
-its configuration file.
+this by either rebooting, or by typing "telinit q" or "kill -1 1" to
+make init re-read its configuration file.
 
 Upgrading
 ---------
