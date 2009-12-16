@@ -2,7 +2,7 @@ Name: supervise-scripts
 Summary: Utility scripts for use with supervise and svscan.
 Version: @VERSION@
 Release: 1
-Copyright: GPL
+License: GPL
 Group: Utilities/System
 Source: http://untroubled.org/supervise-scripts/supervise-scripts-%{version}.tar.gz
 BuildRoot: %{_tmppath}/supervise-scripts-root
