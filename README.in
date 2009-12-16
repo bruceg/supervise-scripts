@@ -1,8 +1,8 @@
 @PACKAGE@
 version @VERSION@
 @TODAY@
-Copyright (C) 2003
-Bruce Guenter <bruceg@em.ca>
+Copyright (C) @YEAR@
+Bruce Guenter <bruce@untroubled.org>
 http://untroubled.org/supervise-scripts/
 
 This package is a set of scripts that may be useful for starting and
@@ -11,8 +11,6 @@ part of the daemontools package.
 
 daemontools was written by D. J. Bernstein <djb@pobox.com> and can be
 found at http://cr.yp.to/daemontools.html
-I have source and binary RPMs available at
-http://untroubled.org/rpms/daemontools/
 
 A mailing list has been set up to discuss this and other packages.
 To subscribe, send an email to:
@@ -20,8 +18,8 @@ To subscribe, send an email to:
 A mailing list archive is available at:
 	http://lists.untroubled.org/?list=bgware
 
-Development versions of @PACKAGE@ are available via Subversion at:
-	svn://bruce-guenter.dyndns.org/@PACKAGE@/trunk
+Development versions of @PACKAGE@ are available via git at:
+	http://untroubled.org/git/@PACKAGE@.git
 
 Installing
 ----------
