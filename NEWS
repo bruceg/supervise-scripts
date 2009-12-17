@@ -3,6 +3,9 @@ Changes in version 4.0
 
 - Added svc-build, for initially creating services.
 
+- Modified svc-start to ignore the stick bit on services in favor of
+  just looking at the log subdirectory.  Assumes daemontools-0.76.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------

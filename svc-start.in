@@ -43,7 +43,7 @@ for svc in "$@"; do
   echon "Starting $svc: "
 
   # Control the log process first, so that all messages are logged ...
-  if [ -k "$svc" ]; then
+  if [ -d "$svc/log" ]; then
     start "$svc/log"
   fi
 
