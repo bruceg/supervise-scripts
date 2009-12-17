@@ -1,0 +1,5 @@
+bins = ' '.join([ f[:-3] for f in glob('*=in') ])
+mans = ' '.join(glob('*.1'))
+: programs
+bindir=$(PREFIX)$$( head -n 1 conf-bin ); mkdir -p $$bindir; install -m 755 %(bins)s $$bindir/
+mandir=$(PREFIX)$$( head -n 1 conf-man ); mkdir -p $$mandir/man1; install -m 644 %(mans)s $$mandir/man1/

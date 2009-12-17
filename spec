@@ -9,7 +9,7 @@ BuildRoot: %{_tmppath}/supervise-scripts-root
 BuildArch: noarch
 URL: http://untroubled.org/supervise-scripts/
 Packager: Bruce Guenter <bruceg@em.ca>
-Requires: daemontools >= 0.70-2
+Requires: daemontools >= 0.70-r2
 Requires: fileutils
 Requires: grep
 Requires: sh-utils
@@ -33,11 +33,7 @@ mkdir -p $RPM_BUILD_ROOT%{_mandir}
 mkdir -p $RPM_BUILD_ROOT/service
 mkdir -p $RPM_BUILD_ROOT/var/service
 
-echo $RPM_BUILD_ROOT%{_bindir} >conf-bin
-echo $RPM_BUILD_ROOT%{_mandir} >conf-man
-make installer instcheck
-./installer
-./instcheck
+make PREFIX=$RPM_BUILD_ROOT install
 
 %post
 %{_bindir}/svscan-add-to-inittab
