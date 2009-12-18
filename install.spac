@@ -1,4 +1,4 @@
-bins = ' '.join([ f[:-3] for f in glob('*=in') ])
+bins = ' '.join([ f[:-3] for f in glob('*=sh') ])
 mans = ' '.join(glob('*.1'))
 : programs
 bindir=$(PREFIX)$$( head -n 1 conf-bin ); mkdir -p $$bindir; install -m 755 %(bins)s $$bindir/

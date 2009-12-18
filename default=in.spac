@@ -1,6 +1,0 @@
-dependon(['echon.sh'])
-dependon(readlist(target+'=in', dir))
-dependon([target+'.in'])
-: warn-auto.sh
-cat %(deplist)s >%(target)s
-chmod 755 %(target)s
