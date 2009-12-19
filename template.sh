@@ -9,9 +9,9 @@ fatal() {
 }
 
 usage_nocd() {
-  args=$1; min=$2; max=$3; shift 3
-  if [ $args -lt $min -o $args -gt $max ]; then
-    echo "$0: usage: $program $@" >&2
+  min=$1; max=$2; msg=$3; shift 3
+  if [ $# -lt $min -o $# -gt $max ]; then
+    echo "$0: usage: $program $msg" >&2
     exit 1
   fi
 }

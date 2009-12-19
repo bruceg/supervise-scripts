@@ -1,4 +1,4 @@
-usage_nocd $# 2 3 "directory run-file [log-run-file]"
+usage_nocd 2 3 "directory run-file [log-run-file]" "$@"
 
 dir="$1"
 run="$2"

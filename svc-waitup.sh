@@ -1,4 +1,4 @@
-usage $# 1 1 service
+usage 1 1 service "$@"
 if svc-isup "$1"; then exit 0; fi
 sleep 1
 count=1

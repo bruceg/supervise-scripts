@@ -3,7 +3,7 @@ if [ "$1" = -q ]; then
   shift
 fi
 
-usage $# 1 9999 "[-q] service [service ...]"
+usage 1 9999 "[-q] service [service ...]" "$@"
 
 stop() {
   touch "$1"/down

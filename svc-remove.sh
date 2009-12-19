@@ -1,4 +1,4 @@
-usage $# 1 1 service
+usage 1 1 service "$@"
 
 svc="$1"
 

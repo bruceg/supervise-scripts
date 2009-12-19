@@ -1,4 +1,4 @@
-usage $# 1 9999 service [service ...]
+usage 1 9999 service [service ...] "$@"
 
 for svc in "$@"; do
   if svok "$svc"; then

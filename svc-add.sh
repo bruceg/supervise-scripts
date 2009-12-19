@@ -5,7 +5,7 @@ else
   down=false
 fi
 
-usage $# 1 2 "[-d] svc-directory [svc-name]"
+usage 1 2 "[-d] svc-directory [svc-name]" "$@"
 
 svcdir="$1"
 if ! echo "$svcdir" | egrep '^/' >/dev/null 2>&1; then
