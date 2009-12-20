@@ -1,11 +1,6 @@
+opt_d=false
 usage 1 2 'd' "[-d] svc-directory [svc-name]" "$@"
 shift $(( $OPTIND - 1 ))
-
-if [ x"$opt_d" != x ]; then
-  down=true
-else
-  down=false
-fi
 
 svcdir="$1"
 if ! echo "$svcdir" | egrep '^/' >/dev/null 2>&1; then
@@ -26,13 +21,13 @@ if ! [ -d "$svcdir" ]; then
   fatal "'$svcdir' is not a directory."
 fi
 
-if $down; then
+if $opt_d; then
   touch "$svcdir"/down
 fi
 
 if [ -d "$svcdir"/log ]; then
   chmod +t "$svcdir"
-  if $down; then
+  if $opt_d; then
     touch "$svcdir"/log/down
   fi
 else
@@ -41,6 +36,6 @@ fi
 
 ln -s "$svcdir" "$svcname"
 
-if "$down"; then
+if "$opt_d"; then
   echo "Type 'svc-start $svcname' to start the service."
 fi

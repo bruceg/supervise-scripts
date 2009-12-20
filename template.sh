@@ -9,9 +9,9 @@ fatal() {
 }
 
 usage_nocd() {
-  min=$1; max=$2; msg=$3; shift 3
+  min=$1; max=$2; opts=$3; msg=$4; shift 4
 
-  while getopts qg flag; do
+  while getopts q$opts flag; do
     case $flag in
       q)
         exec >/dev/null
@@ -20,7 +20,7 @@ usage_nocd() {
         exit 1
 	;;
       ?)
-        eval "opt_${flag}=1"
+        eval "opt_${flag}=true"
 	;;
     esac
   done

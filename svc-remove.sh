@@ -1,4 +1,4 @@
-usage 1 1 service "$@"
+usage 1 1 '' service "$@"
 shift $(( $OPTIND - 1 ))
 
 svc="$1"

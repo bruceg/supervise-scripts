@@ -1,4 +1,4 @@
-usage_nocd 2 3 "directory run-file [log-run-file]" "$@"
+usage_nocd 2 3 '' "directory run-file [log-run-file]" "$@"
 shift $(( $OPTIND - 1 ))
 
 dir="$1"
