@@ -1,9 +1,5 @@
-if [ "$1" = -q ]; then
-  exec >/dev/null
-  shift
-fi
-
-usage 1 9999 "[-q] service [service ...]" "$@"
+usage 1 9999 "service [service ...]" "$@"
+shift $(( $OPTIND - 1 ))
 
 start() {
   # Check the "run" file
