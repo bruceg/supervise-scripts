@@ -5,6 +5,8 @@ svc-stop - Stop a svscan service.
 .B svc-stop
 [
 .B -q
+] [
+.B -k
 ]
 .I SERVICE
 [
@@ -19,7 +21,18 @@ to stop the service, and then waiting for the service to come down.
 If the service has a log service, it is stopped after the service is
 stopped.
 .SH OPTIONS
-.TD
+.TP
+.B -k
+Normally,
+.B svc-stop
+only sends
+.B SIGTERM
+to the signal to make it stop.  If this option is given then
+.B svc-stop
+will subsequently send
+.B SIGKILL
+to the service if it does not stop.
+.TP
 .B -q
 Suppress all non-error messages.
 .SH ENVIRONMENT
