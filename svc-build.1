@@ -1,0 +1,43 @@
+.TH svc-build 1
+.SH NAME
+svc-build \- Build up a svscan service
+.SH SYNOPSIS
+.B svc-build
+.I DIRECTORY
+.I RUN-FILE
+[
+.I LOG-RUN-FILE
+]
+.SH DESCRIPTION
+.B svc-build
+sets up a directory for svscan to run a service and an optional log
+service.  This would be used when building or installing a package or
+setting up a custom service from source files.
+
+.B svc-build
+creates the named service directory with default permissions.  It then
+copies in
+.I RUN-FILE
+as
+.IB DIRECTORY /run
+and marks it as executable.  If the log run file is given, it creates
+the log service directory and copies in
+.I LOG-RUN-FILE
+as
+.IB DIRECTORY /log/run
+and marks it as executable.  It also marks the service directory as
+"sticky" for compatibility with older versions of
+.BR svscan .
+
+If
+.I DIRECTORY
+is not an absolute path, it is prefixed with the value of
+.BR $SVCLOCKDIR .
+.SH ENVIRONMENT
+.TP
+.B SVCLOCKDIR
+If set, this overrides the default of
+.I /var/service
+for the default service directory base path.
+.SH "SEE ALSO"
+svc-add(1)
