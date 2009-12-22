@@ -1,0 +1,51 @@
+.TH svc-kill 1
+.SH NAME
+svc-kill \- Send a signal to svscan services.
+.SH SYNOPSIS
+.B svc-kill
+[
+.I SIGNAL
+]
+.I SERVICE
+[
+.I SERVICE ...
+]
+.SH DESCRIPTION
+Sends a signal to one or more svscan services, much like the system
+command
+.BR kill(1) ,
+using the
+.B svc
+command.  Since
+.B svc
+has a limited set of signals that it can send to the service, the set
+of signals that
+.B svc-kill
+can send is similarly limited.
+.SH OPTIONS
+.TP
+.B -l
+List the names of the signals that
+.B svc-kill
+accepts and exit.
+.SH EXAMPLES
+Make qmail reload its locals and virtualdomains files by sending it
+SIGHUP:
+
+.EX
+svc-kill HUP qmail
+.EE
+.SH ENVIRONMENT
+.TP
+.B SVSCANDIR
+If set, this overrides the default of
+.I /service
+for the directory into which the services should be linked.
+.SH "SEE ALSO"
+kill(1)
+.SH CAVEATS
+The underlying
+.B svc
+program does not exit false when it is unable to send the signal.  As
+such, the exit code from this program cannot be used to check if the
+signal was actually sent.

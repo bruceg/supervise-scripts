@@ -15,6 +15,7 @@ svc-add
 svc-build
 svc-isdown
 svc-isup
+svc-kill
 svc-remove
 svc-restart
 svc-start

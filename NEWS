@@ -3,6 +3,8 @@ Changes in version 4.0
 
 - Added svc-build, for initially creating services.
 
+- Added svc-kill, to send named signals to services.
+
 - Modified svc-start to ignore the stick bit on services in favor of
   just looking at the log subdirectory.  Assumes daemontools-0.76.
 
