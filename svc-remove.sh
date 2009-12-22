@@ -11,7 +11,7 @@ fi
 
 # Remove the symlink without loosing track of where it points to
 cd "$svc"
-rm ${SVSCANDIR-/service}/"$svc"
+rm "$SVSCANDIR/$svc"
 
 # Stop the supervise tasks
 if [ -d log ]; then

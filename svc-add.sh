@@ -4,7 +4,7 @@ shift $(( $OPTIND - 1 ))
 
 svcdir="$1"
 if ! echo "$svcdir" | egrep '^/' >/dev/null 2>&1; then
-  svcdir="${SVCLOCKDIR-/var/service}/$svcdir"
+  svcdir="$SVCLOCKDIR/$svcdir"
 fi
 
 if [ "X$2" = X ]; then

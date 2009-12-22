@@ -40,6 +40,8 @@ usage_nocd() {
 
 usage() {
   usage_nocd "$@"
-  cd "${SVSCANDIR-/service}"
+  cd "$SVSCANDIR"
 }
 
+SVSCANDIR="${SVSCANDIR-/service}"
+SVCLOCKDIR="${SVCLOCKDIR-/var/service}"
