@@ -37,7 +37,7 @@ catit() { cat "$filename" | egrep -v "$SV_pattern" | egrep -v "$SX_pattern"; }
 # the inittab so that svscan gets executed before the rc# scripts do.
 
 # First, find the target pattern
-lineno=`catit | egrep -n '^[^:]*:0:wait:.*rc' | cut -d: -f1 | head -1`
+lineno=`catit | egrep -n '^[^:]*:0:wait:.*rc' | cut -d: -f1 | head -n 1`
 if [ -z "$lineno" ]
 then
   echo "$0: Couldn't find the search line in '$filename'."
@@ -53,10 +53,10 @@ fi
 
 # Splice the new lines into the old file
 {
-  catit | head -$(($lineno-1))
+  catit | head -n $(($lineno-1))
   echo "SV:2345:respawn:$conf_bin/svscan-start /service"
   echo "SX:S016:wait:$conf_bin/svscan-stopall /service"
-  catit | tail +$lineno
+  catit | tail -n +$lineno
 } >"$tmpfile"
 
 # And move it over the existing file
