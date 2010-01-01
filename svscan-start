@@ -7,7 +7,7 @@ exec >/dev/console 2>&1
 for dir in "$@"; do
   if [ -d "$dir" ]; then
     for svc in "$dir"/*; do
-      if [ -d "$svc/log" ]; then
+      if [ -x "$svc/log/run" ]; then
         chmod +t "$svc"
       fi
     done
