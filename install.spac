@@ -1,5 +1,7 @@
-bins = ' '.join([ f[:-3] for f in glob('*=sh') ])
+bins = [ f[:-3] for f in glob('*=sh') ] \
+	+ [ 'svscan-start', 'svscan-stopall' ]
+bins = ' '.join(bins)
 mans = ' '.join(glob('*.1'))
-: programs
+: programs conf-bin conf-man
 bindir=$(PREFIX)$$( head -n 1 conf-bin ); mkdir -p $$bindir; install -m 755 %(bins)s $$bindir/
 mandir=$(PREFIX)$$( head -n 1 conf-man ); mkdir -p $$mandir/man1; install -m 644 %(mans)s $$mandir/man1/
