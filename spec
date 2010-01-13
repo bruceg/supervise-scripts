@@ -4,7 +4,7 @@ Version: @VERSION@
 Release: 1
 License: GPL
 Group: Utilities/System
-Source: http://untroubled.org/supervise-scripts/supervise-scripts-%{version}.tar.gz
+Source: http://untroubled.org/supervise-scripts/archive/supervise-scripts-%{version}.tar.gz
 BuildRoot: %{_tmppath}/supervise-scripts-root
 BuildArch: noarch
 URL: http://untroubled.org/supervise-scripts/
